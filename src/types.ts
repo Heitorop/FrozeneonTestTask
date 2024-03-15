@@ -5,7 +5,7 @@ export interface Product {
   title: string
   discountPercentage: number
   id: number
-  images: Array<string>
+  images: string[]
   price: number
   rating: number
   stock: number
@@ -14,7 +14,7 @@ export interface Product {
 
 export interface Products {
   limit: number
-  products: Array<Product>
+  products: Product[]
   skip: number
   total: number
 }
