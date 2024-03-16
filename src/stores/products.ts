@@ -31,29 +31,27 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
 
   const getAllProducts = async (limit = LIMIT_OF_PRODUCTS) => {
     try {
-      const data = await fetch(`https://dummyjson.com/products?limit=${limit}`).then((res) =>
-        res.json()
-      )
+      const response = await fetch(`https://dummyjson.com/products?limit=${limit}`)
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error('Something with server')
+      }
       products.value = data.products
       isLoading.value = false
     } catch (e) {
       error.value = (e as Error).message
-      console.log(error)
+      console.error(error)
     }
   }
 
   const getProducts = (number: number) => {
     const newProducts = []
-    for (
-      let i = 0;
-      i < number && productIndex.value < products.value.length && products.value.length > 1;
-      i++
-    ) {
-      // get next product from main array of products
-      const nextPost = products.value[productIndex.value]
-      newProducts.push(nextPost)
-      productIndex.value++ // increase index
+    if (productIndex.value < products.value.length) {
+      newProducts.push(...products.value.slice(productIndex.value, productIndex.value + number))
+
+      productIndex.value += newProducts.length
     }
+
     return newProducts
   }
 
