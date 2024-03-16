@@ -27,7 +27,7 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
 
   const isLoading = ref(false)
 
-  const error = ref('');
+  const error = ref('')
 
   const getAllProducts = async (limit = LIMIT_OF_PRODUCTS) => {
     try {
@@ -37,7 +37,7 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
       products.value = data.products
       isLoading.value = false
     } catch (e) {
-      error.value = (e as Error).message;
+      error.value = (e as Error).message
       console.log(error)
     }
   }

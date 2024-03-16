@@ -21,8 +21,8 @@ const searchedProducts = computed(() => storeProducts.searchedProducts)
 const posts = ref<Product[]>([])
 const scrollComponent = ref(null)
 
-onMounted(() => {
-  storeProducts.getAllProducts(LIMIT_OF_PRODUCTS)
+onMounted(async() => {
+  await storeProducts.getAllProducts(LIMIT_OF_PRODUCTS)
   storeProducts.$patch({ productIndex: 0 })
   loadMorePosts()
 })
