@@ -47,7 +47,8 @@ const loadMorePosts = () => {
   }
 
   setTimeout(() => {
-    posts.value.push(...storeProducts.getProducts(NUMBER_OF_PRODUCTS))
+    const newProducts = storeProducts.getProducts(NUMBER_OF_PRODUCTS)
+    posts.value.push(...newProducts)
     storeProducts.$patch({ isLoading: false })
   }, 500)
 }
