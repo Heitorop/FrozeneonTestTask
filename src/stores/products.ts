@@ -1,5 +1,5 @@
 import type { Product } from '@/types'
-import { NUMBER_OF_PRODUCTS } from '@/utils/constants'
+import { LIMIT_OF_PRODUCTS, NUMBER_OF_PRODUCTS } from '@/utils/constants'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
@@ -10,6 +10,7 @@ interface ProductsStore {
   searchedProducts: Ref<Product[]>
   searchValue: Ref<string>
   isLoading: Ref<boolean>
+  error: Ref<string>
   getAllProducts: (limit?: number) => void
   getProducts: (number: number) => Product[]
   searchProducts: (name: string) => void
@@ -26,14 +27,17 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
 
   const isLoading = ref(false)
 
-  const getAllProducts = async (limit = 100) => {
+  const error = ref('');
+
+  const getAllProducts = async (limit = LIMIT_OF_PRODUCTS) => {
     try {
       const data = await fetch(`https://dummyjson.com/products?limit=${limit}`).then((res) =>
         res.json()
       )
       products.value = data.products
       isLoading.value = false
-    } catch (error) {
+    } catch (e) {
+      error.value = (e as Error).message;
       console.log(error)
     }
   }
@@ -65,6 +69,7 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
     searchValue,
     productIndex,
     isLoading,
+    error,
     getAllProducts,
     getProducts,
     searchProducts

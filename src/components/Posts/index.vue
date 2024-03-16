@@ -59,7 +59,7 @@ const handleScroll = () => {
 }
 </script>
 <template>
-  <div class="posts-wrapper" ref="scrollComponent" @scroll="handleScroll">
+  <div v-if='posts' class="posts-wrapper" ref="scrollComponent" @scroll="handleScroll">
     <transition-group name="list">
       <NotFound v-if="searchValue && searchedProducts.length === 0 && !isLoading" />
       <Card v-else v-for="(product, index) in posts" :product="product" :key="index" />

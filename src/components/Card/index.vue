@@ -4,7 +4,6 @@ import type { Product } from '@/types'
 defineProps<{
   product: Product
 }>()
-
 </script>
 <template>
   <div class="card">
@@ -20,7 +19,7 @@ defineProps<{
         >
         <span class="card-info">{{ product.brand }}</span>
       </div>
-      <div>
+      <div class="card-info-wrapper">
         <span class="card-info">${{ product.price }}</span>
         <span class="card-info">⭐{{ product.rating }}</span>
         <span class="card-badge">{{ product.category }}</span>
@@ -74,10 +73,14 @@ defineProps<{
     text-align: center; /* Выравниваем текст по центру */
   }
 
-  
-  @media(width <= 768px){
+  @media (width <= 768px) {
     max-width: 320px;
     flex-direction: column;
+
+    &-info-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 </style>
