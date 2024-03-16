@@ -1,4 +1,5 @@
 import type { Product } from '@/types'
+import { NUMBER_OF_PRODUCTS } from '@/utils/constants'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
@@ -6,32 +7,22 @@ interface ProductsStore {
   products: Ref<Product[]>
   // searchedProducts: Ref<Product>|null
   productIndex: Ref<number>
+  searchedProducts: Ref<Product[]>
+  searchValue: Ref<string>
   isLoading: Ref<boolean>
   getAllProducts: (limit?: number) => void
   getProducts: (number: number) => Product[]
-  searchProducts: (name: string) => Product[] | []
+  searchProducts: (name: string) => void
 }
 
 export const useProductsStore = defineStore('products', (): ProductsStore => {
-  const products = ref([
-    {
-      brand: '',
-      category: '',
-      description: '',
-      title: '',
-      discountPercentage: 0,
-      id: 0,
-      images: [''],
-      price: 0,
-      rating: 0,
-      stock: 0,
-      thumbnail: ''
-    }
-  ])
+  const products = ref<Product[]>([])
+
+  const searchedProducts = ref<Product[]>([])
+
+  const searchValue = ref('')
 
   const productIndex = ref(0)
-
-  // const searchedProducts = ref(null)
 
   const isLoading = ref(false)
 
@@ -54,7 +45,6 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
       i < number && productIndex.value < products.value.length && products.value.length > 1;
       i++
     ) {
-      isLoading.value = true
       // get next product from main array of products
       const nextPost = products.value[productIndex.value]
       newProducts.push(nextPost)
@@ -64,8 +54,19 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
   }
 
   const searchProducts = (name: string) => {
-    return products.value.find((product) => product.title === name)
+    searchedProducts.value = products.value.filter((product) =>
+      product.title.toLowerCase().includes(name.toLowerCase())
+    )
   }
 
-  return { products, productIndex, isLoading, getAllProducts, getProducts, searchProducts }
+  return {
+    products,
+    searchedProducts,
+    searchValue,
+    productIndex,
+    isLoading,
+    getAllProducts,
+    getProducts,
+    searchProducts
+  }
 })

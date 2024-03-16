@@ -73,5 +73,11 @@ defineProps<{
     padding: 2px 6px 3px;
     text-align: center; /* Выравниваем текст по центру */
   }
+
+  
+  @media(width <= 768px){
+    max-width: 320px;
+    flex-direction: column;
+  }
 }
 </style>
