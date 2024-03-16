@@ -1,39 +1,40 @@
-# verbetskyi-app
 
-This template should help get you started developing with Vue 3 in Vite.
+# Test task Frozeneon - products search
 
-## Recommended IDE Setup
+## Table of contents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Links](#links)
+- [Built with](#built-with)
+- [Author](#author)
 
-## Type Support for `.vue` Imports in TS
+## Overview
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### The challenge
 
-## Customize configuration
+Requirements:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Vanila vue virtual scroll
+- Search by list.
+- Animation while filtering the list.
+- Deviding view and logic.
+- Create search by products.
 
-## Project Setup
 
-```sh
-npm install
-```
+### Links
 
-### Compile and Hot-Reload for Development
+- Solution URL: (https://github.com/Heitorop/FrozeneonTestTask)
+- Live Site URL: (https://frozeneon-test-task-eta.vercel.app/)
 
-```sh
-npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+## Built with
 
-```sh
-npm run build
-```
+- Vue
+- Scss, Css
+- Pinia
+  
 
-### Lint with [ESLint](https://eslint.org/)
+## Author
 
-```sh
-npm run lint
-```
+- Linkedin - [Verbetskyi Arthur](https://www.linkedin.com/in/arthur-verbetskyi)
