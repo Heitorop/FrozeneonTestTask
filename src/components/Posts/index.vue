@@ -22,6 +22,7 @@ const posts = ref<Product[]>([])
 const scrollComponent = ref(null)
 
 onMounted(() => {
+  storeProducts.getAllProducts(LIMIT_OF_PRODUCTS)
   storeProducts.$patch({ productIndex: 0 })
   loadMorePosts()
 })
@@ -53,13 +54,16 @@ const loadMorePosts = () => {
 
 const handleScroll = () => {
   let element: HTMLElement | null = scrollComponent.value
-  if (element!.scrollTop + element!.clientHeight >= element!.scrollHeight - 1 && !searchedProducts.value.length) {
+  if (
+    element!.scrollTop + element!.clientHeight >= element!.scrollHeight - 1 &&
+    !searchedProducts.value.length
+  ) {
     loadMorePosts()
   }
 }
 </script>
 <template>
-  <div v-if='posts' class="posts-wrapper" ref="scrollComponent" @scroll="handleScroll">
+  <div v-if="posts" class="posts-wrapper" ref="scrollComponent" @scroll="handleScroll">
     <transition-group name="list">
       <NotFound v-if="searchValue && searchedProducts.length === 0 && !isLoading" />
       <Card v-else v-for="(product, index) in posts" :product="product" :key="index" />
